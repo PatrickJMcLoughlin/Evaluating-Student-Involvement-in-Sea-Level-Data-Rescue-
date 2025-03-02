@@ -1,5 +1,5 @@
 PROJECT TITLE
-Marigram Generation and Error Checking for Kilrush and Dún Laoghaire
+Evaluating Student Involvement in Sea Level Data Rescue
 ________________________________________
 REPOSITORY DESCRIPTION
 This repository supports the GY369 Oceanography module at Maynooth University (2024-2025, Phase 1) and the GY310B Geography Research Workshops (Phase 2). The project focuses on digitizing tidal images (marigrams) for Kilrush and Dún Laoghaire. The code in this repository generates marigrams for both locations using tidal harmonic analysis.
