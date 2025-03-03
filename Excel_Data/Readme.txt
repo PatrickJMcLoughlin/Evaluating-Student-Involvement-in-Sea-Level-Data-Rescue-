@@ -2,6 +2,9 @@ Excel Folder Contents:
 
 This folder contains sample digitized data for Kilrush and Dún Laoghaire, compiled in Excel worksheet format by students as part of this research. The data represents a sample of student work only.
 
+Kilrush Folder:
+High_and_Low_Tides_Week14-17_Kilrush.xlsx: A sample week of student-digitized data.
+
 Dún Laoghaire Folder:
 The Dún Laoghaire folder contains two subfolders: Training_Data and Historic_Data.
 -Training_Data Subfolder:
