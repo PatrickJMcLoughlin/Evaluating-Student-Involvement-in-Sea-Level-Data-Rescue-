@@ -4,8 +4,8 @@ This folder includes R scripts for three main tasks:
 2. Connecting to the Marine Institute's ERDDAP server to generate marigrams for Kilrush for the years 2019 to 2021.
 3. Producing tidal predictions and weekly marigrams for Dún Laoghaire (1925) using harmonic analysis and historical data.
  
--Overview of Code:
-1. Generate_Kilrush_Marigram_Images (R file)
+Overview of Code:
+- Generate_Kilrush_Marigram_Images (R file)
 This R script generates marigrams (tidal graphs) for Kilrush, Ireland, for a specified year by retrieving tidal data from the Irish National Tide Gauge Network via the ERDDAP server. The script performs the following key tasks:
 1. Data Retrieval & Processing
 •Fetches water level data from the ERDDAP server, referenced in metres to Ordnance Datum Malin (ODM).
