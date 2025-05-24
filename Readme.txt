@@ -37,4 +37,4 @@ PROJECT TITLE.txt
 ________________________________________
 CONTACT
 For questions, please contact:
-Email: patrick.mcloughlin.2014@mumaile.ie
+Email: patrick.mcloughlin.2014@mumail.ie
