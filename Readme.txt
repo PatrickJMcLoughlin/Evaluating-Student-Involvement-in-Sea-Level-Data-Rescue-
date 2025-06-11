@@ -16,7 +16,7 @@ Scripts to validate digitized marigrams for Kilrush and Dún Laoghaire by identi
 Scripts for generating marigrams for Kilrush covering the years 2019 to 2021.
 ________________________________________
 NOTES
-There may be discrepancies between the Dún Laoghaire 1925 data and student-digitized data. This is because the 1925 data comes from McLoughlin et al., 2024 (Level_2_Adjusted_Data), which has been corrected for bends and skews in the original images. An offset allowance of up to 30mm is acceptable. However, all tidal points at hourly intervals should align closely, and any missing points will be identified.
+There may be discrepancies between the Dún Laoghaire 1925 data and student-digitized data. This is because the 1925 data comes from McLoughlin et al., 2024 (Level_2_Adjusted_Data), which has been corrected for bends and skews in the original images. An offset allowance of up to 30 mm is acceptable. However, all tidal points at hourly intervals should align closely, and any missing points will be identified.
 ________________________________________
 PURPOSE OF CODE
 This code serves multiple purposes:
