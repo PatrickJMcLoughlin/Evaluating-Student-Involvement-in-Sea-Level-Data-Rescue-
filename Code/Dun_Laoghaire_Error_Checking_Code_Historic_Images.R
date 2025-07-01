@@ -59,7 +59,7 @@ ggplot(merged_data, aes(x = DateTime)) +
   geom_hline(yintercept = 0, linetype = "dashed", color = "red") +
   scale_color_manual(values = c("Data" = "blue", "Observed" = "black", "Residuals" = "green")) +
   labs(title = "Data vs Observed Tides and Residuals",
-       x = "DateTime", y = "Tide Height (m)",
+       x = "DateTime", y = "Tide Height (ft)",
        color = "Legend") +
   theme_minimal()
 
