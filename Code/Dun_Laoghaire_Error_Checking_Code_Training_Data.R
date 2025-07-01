@@ -70,7 +70,7 @@ ggplot(merged_data, aes(x = DateTime)) +
   scale_color_manual(values = c("Predicted" = "blue", "Observed" = "black", "Residuals" = "green")) +
   # Labels and theme
   labs(title = "Predicted vs Observed Tides and Residuals",
-       x = "DateTime", y = "Tide Height (ft)",
+       x = "DateTime", y = "Tide Height (m)",
        color = "Legend") +
   theme_minimal()
 
