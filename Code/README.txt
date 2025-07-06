@@ -95,6 +95,6 @@ This R script performs quality control on the 1925 digitized tidal data (McLough
 • Calculating residuals (differences between predicted and observed tides).
 • Generating a summary text file with residual statistics.
 • Identifying any missing or incorrectly digitized points.
-Since the 1925 data is based on Level_2_Adjusted data (which corrects for skews and offsets in the image), a slight offset is expected between the student-digitized data and the 1925 dataset. However, if the student data is digitized correctly, it should align within 20-30 mm (0.02-0.03 m) of the 1925 data.
+Since the 1925 data is based on Level_2_Adjusted data (which corrects for skews and offsets in the image), a slight offset is expected between the student-digitized data and the 1925 dataset. However, if the student data is digitized correctly, it should align within 20-30 mm (0.02-0.03 m) of the 1925 data. Note: Not all marigrams were fully digitized; in some cases, poor trace quality prevented complete digitization.
 
 
