@@ -131,7 +131,7 @@ ggsave(paste0("kilrush_2021_week_", wk, ".png"))
 # Set working directory (modify if needed)
 setwd("C:/path/to/your/folder")
 file <- "High_and_Low_Tides_Week14-17_Kilrush.xlsx"  # Sample data found in the 'Excel_Data' subfolder on GitHub
-data <- read_xlsx(paste0(file, ".xlsx"), skip = 8)
+data <- read_xlsx(file, skip = 8)
 
 # Remove unwanted rows and adjust column names
 data <- data %>%
