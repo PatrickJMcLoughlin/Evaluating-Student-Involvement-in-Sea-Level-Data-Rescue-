@@ -82,6 +82,17 @@ hl <- HL(dun_laoghaire$AstroTide, dun_laoghaire$DateTime)
 # ==========================================
 dun_laoghaire <- dun_laoghaire %>% 
   mutate(Week = week(DateTime), DOY = yday(DateTime), Hour = hour(DateTime), Minute = minute(DateTime))
+create_marigram <- function(weekly_data, tide_column, title) {
+  ggplot(weekly_data) +
+    geom_line(aes(x = Hour + Minute / 60, y = !!sym(tide_column), group = DOY, color = as.factor(format(DateTime, "%b %d")))) +
+    geom_text(aes(x = min(Hour + Minute / 60), y = 2, label = format(min(DateTime), "%b %d")), hjust = 'left', color = 'red') +
+    geom_text(aes(x = max(Hour + Minute / 60), y = 2, label = format(max(DateTime), "%b %d")), hjust = 'right', color = 'red') +
+    theme_bw() +
+    labs(color = "Date", title = title) +
+    scale_color_brewer(palette = "Set1") +
+    theme(legend.position = "right")
+}
+
 
 # ==========================================
 # 9. Loop through each week in 1925 and create/save marigrams
