@@ -28,8 +28,8 @@ rm(list=ls())
 # ==========================================
 # 3. Load and Format Dún Laoghaire Data
 # ==========================================
-# **USER INSTRUCTION**: The data file '1925_DL_m_ODM.csv' should be located in the 'Data_Training' folder.
-# Ensure that the file '1925_DL_m_ODM.csv' is available in the "Excel_Data/Dún_LaoghaireTraining_Data/" subfolder on GitHub, or 
+# **USER INSTRUCTION**: The data file '1925_DL_m_ODM.csv' should be located in the 'Training_Data' folder.
+# Ensure that the file '1925_DL_m_ODM.csv' is available in the "Excel_Data/Dún_Laoghaire/Training_Data/" subfolder on GitHub, or 
 # place it in the appropriate directory relative to your working directory.
 
 # Example folder structure:
