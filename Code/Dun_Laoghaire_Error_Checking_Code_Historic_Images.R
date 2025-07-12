@@ -6,60 +6,52 @@
 #   It also loads digitized tidal data from a student-produced Excel file (in this case in feet relative to chart Datum).
 #   The script then compares the 1925 published digitized tidal data with the student digitized data, calculates residuals,
 #   and generates visualizations along with a summary text file.
+#   Both `1925_DL.csv` and `21-28th_September_1925.xlsx` can be found in the GitHub folder: 
+#   Excel_Data/Dún_Laoghaire/Historic_Data/
 
 # Load required libraries
-library(readr)      # For reading CSV files
-library(readxl)     # For reading Excel files
-library(dplyr)      # For data manipulation
-library(ggplot2)    # For visualization
-library(lubridate)  # For handling date-time formats
+library(readr)    # For reading CSV files
+library(readxl)   # For reading Excel files
+library(dplyr)    # For data manipulation
+library(ggplot2)  # For visualization
+library(lubridate) # For handling date-time formats
 
 # Set working directory (modify if needed)
-# setwd("C:/path/to/your/folder")  # <-- MODIFY THIS PATH TO YOUR OWN DIRECTORY
+setwd("C:/path/to/your/folder")  # <-- MODIFY THIS PATH TO YOUR OWN DIRECTORY
 
-# Check if the required files exist
-if (!file.exists("Excel_Data/Dún_Laoghaire/1925_DL.csv")) {
-  stop("File '1925_DL.csv' not found. Please check the README for instructions.")
-}
+# Load predicted tide data
+predicted_data <- read_csv("1925_DL.csv")
 
-if (!file.exists("21-28th_September_1925.xlsx")) {
-  stop("File '21-28th_September_1925.xlsx' not found. Please check the README for instructions.")
-}
-
-# Load 1925 tidal data from McLoughlin et al., 2024  
-# (Formatted 1925 data available in the "Excel_Data/Dún_Laoghaire" subfolder on GitHub)  
-data <- read_csv("Excel_Data/Dún_Laoghaire/1925_DL.csv")
-
-# Rename columns to standardized names and convert DateTime to POSIXct format
-data <- data %>%
-  rename(DateTime = `Date/ Time`, Data = `Reading (ft)`) %>%
-  mutate(DateTime = as.POSIXct(DateTime, format = "%Y-%m-%d %H:%M:%S", tz = "UTC"))
+# Rename columns to standardized names
+predicted_data <- predicted_data %>%
+  rename(DateTime = `Date/ Time`, Predicted = `Reading (ft)`) %>%
+  mutate(DateTime = as.POSIXct(DateTime, format="%Y-%m-%d %H:%M:%S", tz="UTC"))
 
 # Load digitized tide data
-digitized_data <- read_excel("21-28th_September_1925.xlsx", sheet = 1) # Sample data found in the 'Excel_Data' subfolder on GitHub
+digitized_data <- read_excel("21-28th_September_1925.xlsx", sheet = 1)
 
-# Convert Datetime to POSIXct format and keep only necessary columns
+# Convert Datetime to POSIXct format (handling ISO format)
 digitized_data <- digitized_data %>%
-  mutate(DateTime = ymd_hms(Datetime, tz = "UTC")) %>%
-  select(DateTime, Observed = Height)
+  mutate(DateTime = ymd_hms(Datetime, tz="UTC")) %>%
+  select(DateTime, Observed = Height)  # Keep only necessary columns
 
-# Merge the data and observed data based on DateTime
-merged_data <- inner_join(data, digitized_data, by = "DateTime")
+# Merge predicted and observed data
+merged_data <- inner_join(predicted_data, digitized_data, by = "DateTime")
 
-# Compute residuals (Observed - Data)
+# Compute residuals
 merged_data <- merged_data %>%
-  mutate(Residuals = Observed - Data)
+  mutate(Residuals = Observed - Predicted)
 
-# Plot observed vs. data tide levels and residuals
+# Plot observed vs predicted tide levels and residuals
 ggplot(merged_data, aes(x = DateTime)) +
-  geom_line(aes(y = Data, color = "Data"), linewidth = 1.5, linetype = "dashed") +
+  geom_line(aes(y = Predicted, color = "Predicted"), linewidth = 1.5, linetype = "dashed") +
   geom_line(aes(y = Observed, color = "Observed"), linewidth = 1) +
   geom_point(aes(y = Observed, color = "Observed"), size = 2) +
   geom_line(aes(y = Residuals, color = "Residuals"), linewidth = 1, linetype = "solid") +
   geom_hline(yintercept = 0, linetype = "dashed", color = "red") +
-  scale_color_manual(values = c("Data" = "blue", "Observed" = "black", "Residuals" = "green")) +
-  labs(title = "Data vs Observed Tides and Residuals",
-       x = "DateTime", y = "Tide Height (ft)",
+  scale_color_manual(values = c("Predicted" = "blue", "Observed" = "black", "Residuals" = "green")) +
+  labs(title = "Predicted vs Observed Tides and Residuals",
+       x = "DateTime", y = "Tide Height (m)",
        color = "Legend") +
   theme_minimal()
 
@@ -87,3 +79,4 @@ output_file <- "Residuals_Summary.txt"
 writeLines(summary_text, output_file)
 
 cat("Residuals summary saved at:", output_file)
+ 
