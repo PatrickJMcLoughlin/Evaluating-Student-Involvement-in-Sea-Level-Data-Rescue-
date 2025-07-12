@@ -129,7 +129,7 @@ ggsave(paste0("kilrush_2021_week_", wk, ".png"))
 # ============================================
 # Load the "High and Low Tides" dataset for further analysis
 # Set working directory (modify if needed)
-setwd("C:/path/to/your/folder")
+setwd("C:/path/to/your/folder") # <-- MODIFY THIS PATH TO YOUR OWN DIRECTORY
 file <- "High_and_Low_Tides_Week14-17_Kilrush.xlsx"  # Sample data found in the 'Excel_Data' subfolder on GitHub
 data <- read_xlsx(file, skip = 8)
 
