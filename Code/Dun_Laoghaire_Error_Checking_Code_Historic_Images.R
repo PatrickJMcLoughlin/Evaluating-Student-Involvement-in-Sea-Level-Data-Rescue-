@@ -19,39 +19,39 @@ library(lubridate) # For handling date-time formats
 # Set working directory (modify if needed)
 setwd("C:/path/to/your/folder")  # <-- MODIFY THIS PATH TO YOUR OWN DIRECTORY
 
-# Load predicted tide data
-predicted_data <- read_csv("1925_DL.csv")
+# Load reference tide data
+reference_data <- read_csv("1925_DL.csv")
 
 # Rename columns to standardized names
-predicted_data <- predicted_data %>%
-  rename(DateTime = `Date/ Time`, Predicted = `Reading (ft)`) %>%
+reference_data <- reference_data %>%
+  rename(DateTime = `Date/ Time`, Reference = `Reading (ft)`) %>%
   mutate(DateTime = as.POSIXct(DateTime, format="%Y-%m-%d %H:%M:%S", tz="UTC"))
 
 # Load digitized tide data
-digitized_data <- read_excel("21-28th_September_1925.xlsx", sheet = 1)
+digitized_data <- read_excel("21-28th_Sept_Test_1925.xlsx", sheet = 1)
 
 # Convert Datetime to POSIXct format (handling ISO format)
 digitized_data <- digitized_data %>%
   mutate(DateTime = ymd_hms(Datetime, tz="UTC")) %>%
   select(DateTime, Observed = Height)  # Keep only necessary columns
 
-# Merge predicted and observed data
-merged_data <- inner_join(predicted_data, digitized_data, by = "DateTime")
+# Merge reference and observed data
+merged_data <- inner_join(reference_data, digitized_data, by = "DateTime")
 
 # Compute residuals
 merged_data <- merged_data %>%
-  mutate(Residuals = Observed - Predicted)
+  mutate(Residuals = Observed - Reference)
 
-# Plot observed vs predicted tide levels and residuals
+# Plot observed vs reference tide levels and residuals
 ggplot(merged_data, aes(x = DateTime)) +
-  geom_line(aes(y = Predicted, color = "Predicted"), linewidth = 1.5, linetype = "dashed") +
+  geom_line(aes(y = Reference, color = "Reference"), linewidth = 1.5, linetype = "dashed") +
   geom_line(aes(y = Observed, color = "Observed"), linewidth = 1) +
   geom_point(aes(y = Observed, color = "Observed"), size = 2) +
   geom_line(aes(y = Residuals, color = "Residuals"), linewidth = 1, linetype = "solid") +
   geom_hline(yintercept = 0, linetype = "dashed", color = "red") +
-  scale_color_manual(values = c("Predicted" = "blue", "Observed" = "black", "Residuals" = "green")) +
-  labs(title = "Predicted vs Observed Tides and Residuals",
-       x = "DateTime", y = "Tide Height (m)",
+  scale_color_manual(values = c("Reference" = "blue", "Observed" = "black", "Residuals" = "green")) +
+  labs(title = "Reference vs Observed Tides and Residuals",
+       x = "DateTime", y = "Tide Height (ft)",
        color = "Legend") +
   theme_minimal()
 
@@ -79,4 +79,3 @@ output_file <- "Residuals_Summary.txt"
 writeLines(summary_text, output_file)
 
 cat("Residuals summary saved at:", output_file)
- 
