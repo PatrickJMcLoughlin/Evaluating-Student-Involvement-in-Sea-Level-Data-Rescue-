@@ -1,4 +1,5 @@
-This folder contains R scripts for analyzing, error-checking, and generating tidal marigrams for Kilrush (Phase 1) and Dún Laoghaire (Phase 2A/B), using both predicted and historical data sources. The scripts utilize harmonic analysis, ERDDAP data retrieval, and residual analysis for quality control.
+This folder contains R scripts for analyzing, error-checking, and generating tidal marigrams for Kilrush (Phase 1) and Dún Laoghaire (Phase 2A/B), using both predicted and historical data sources. 
+The scripts utilize harmonic analysis, ERDDAP data retrieval, and residual analysis for quality control.
 This folder includes R scripts for three main tasks:
 1. Error-checking the digitized marigrams for both Kilrush and Dún Laoghaire Harbour.
 2. Connecting to the Marine Institute's ERDDAP server to generate marigrams for Kilrush for the years 2019 to 2021.
